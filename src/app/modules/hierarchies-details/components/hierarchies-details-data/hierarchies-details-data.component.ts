@@ -4,8 +4,7 @@ import { ISubordinates } from '../../interfaces/subordinates.interface';
 
 @Component({
   selector: 'app-hierarchies-details-data',
-  templateUrl: './hierarchies-details-data.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './hierarchies-details-data.component.html'
 })
 export class HierarchiesDetailsDataComponent implements AfterViewInit {
   @Input('subordinates') subordinates: ISubordinates[] = [];
