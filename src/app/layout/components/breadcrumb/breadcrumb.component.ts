@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-breadcrumb',
   templateUrl: './breadcrumb.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbComponent {
-
+  @Input('pathes') pathes: any[] = [];
 }

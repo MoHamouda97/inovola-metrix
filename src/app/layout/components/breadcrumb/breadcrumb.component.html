@@ -3,7 +3,11 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">My Views</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Form Builder</li>
+                <li 
+                    *ngFor="let path of pathes; let i = index" 
+                    class="breadcrumb-item" 
+                    [class.active]="path.current"
+                    aria-current="page">{{ path.title }}</li>
             </ol>
         </nav>
     </div>

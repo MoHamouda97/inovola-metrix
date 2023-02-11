@@ -1,4 +1,6 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd, ActivatedRouteSnapshot } from '@angular/router';
+import { filter, map, Subject, takeUntil } from 'rxjs';
 import { applyCount } from '../shared/utilis/count';
 
 declare const $: any;
@@ -7,7 +9,27 @@ declare const $: any;
   selector: 'app-layout',
   templateUrl: './layout.component.html',
 })
-export class LayoutComponent implements AfterViewInit {
+export class LayoutComponent implements AfterViewInit, OnDestroy {
+  pathes: any[] = [];
+  unsubscribeAll: Subject<any> = new Subject<any>();
+
+  constructor(private router: Router, private route: ActivatedRoute) {
+    this.router.events
+      .pipe(
+        takeUntil(this.unsubscribeAll),
+        filter(event => event instanceof NavigationEnd),
+        map(() => this.route.snapshot),
+        map(route => {
+          while (route.firstChild) {
+            route = route.firstChild;
+          }
+          return route;
+        })
+      )
+      .subscribe((route: ActivatedRouteSnapshot) => {
+        this.pathes = route.data?.['urls'];
+      });      
+  }
 
   ngAfterViewInit() {
     $('#menu1').circleMenu({
@@ -20,5 +42,10 @@ export class LayoutComponent implements AfterViewInit {
 
     applyCount();
   } 
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll.next(null);
+    this.unsubscribeAll.complete();    
+  }
 
 }

@@ -29,14 +29,25 @@ export const appRoutes: Route[] = [
             {
                 path: 'form-builder',
                 canActivate: [AuthGuard],
-                loadChildren: () => import('./modules/form-builder/form-builder.module').then(m => m.FormBuilderModule)
+                loadChildren: () => import('./modules/form-builder/form-builder.module').then(m => m.FormBuilderModule),
+                data: {
+                    urls: [
+                        {title: 'Form Builder', current: true}
+                    ]
+                }
             },
             
             // Hierarchies details route
             {
                 path: 'hierarchies-details',
                 canActivate: [AuthGuard],
-                loadChildren: () => import('./modules/hierarchies-details/hierarchies-details.module').then(m => m.HierarchiesDetailsModule)
+                loadChildren: () => import('./modules/hierarchies-details/hierarchies-details.module').then(m => m.HierarchiesDetailsModule),
+                data: {
+                    urls: [
+                        {title: 'Hierarchies list'},
+                        {title: 'Hierarchy name', current: true}
+                    ]
+                }                
             }
         ]
     }

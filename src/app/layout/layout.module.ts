@@ -8,6 +8,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MetrixLoadingBarComponent } from 'src/@METRIX/components/metrix-loading-bar/metrix-loading-bar.component';
 import { MetrixLoadingModule } from 'src/@METRIX/services/loading/loading.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { MetrixLoadingModule } from 'src/@METRIX/services/loading/loading.module
     imports: [
         RouterModule,
         MetrixLoadingBarComponent,
-        MetrixLoadingModule
+        MetrixLoadingModule,
+        SharedModule
     ],
     exports: []
 })
